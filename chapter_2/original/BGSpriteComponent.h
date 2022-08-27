@@ -41,6 +41,7 @@ class BGSpriteComponent : public SpriteComponent
               SDL_Texture *mTexture{};
               Vector2 mOffset;
           };
+
       std::vector<BGTexture> mBGTextures;
       Vector2 mScreenSize;
       float mScrollSpeed;

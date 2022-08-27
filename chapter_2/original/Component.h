@@ -10,7 +10,7 @@ class Component
    public:
       // Constructor
       // (the lower the update order, the earlier the component updates)
-      Component (class Actor *owner, int updateOrder = 100);
+      explicit Component (class Actor *owner, int updateOrder = 100);
 
       // Destructor
       virtual ~Component ();
@@ -18,7 +18,7 @@ class Component
       // Update this component by delta time
       virtual void Update (float deltaTime);
 
-      int GetUpdateOrder () const
+      [[nodiscard]] int GetUpdateOrder () const
         { return mUpdateOrder; }
 
    protected:

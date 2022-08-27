@@ -19,7 +19,7 @@ class Actor
           };
 
       // Constructor/destructor
-      Actor (class Game *game);
+      explicit Actor (class Game *game);
 
       virtual ~Actor ();
 
@@ -33,25 +33,25 @@ class Actor
       virtual void UpdateActor (float deltaTime);
 
       // Getters/setters
-      const Vector2 &GetPosition () const
+      [[nodiscard]] const Vector2 &GetPosition () const
         { return mPosition; }
 
       void SetPosition (const Vector2 &pos)
         { mPosition = pos; }
 
-      float GetScale () const
+      [[nodiscard]] float GetScale () const
         { return mScale; }
 
       void SetScale (float scale)
         { mScale = scale; }
 
-      float GetRotation () const
+      [[nodiscard]] float GetRotation () const
         { return mRotation; }
 
       void SetRotation (float rotation)
         { mRotation = rotation; }
 
-      State GetState () const
+      [[nodiscard]] State GetState () const
         { return mState; }
 
       void SetState (State state)

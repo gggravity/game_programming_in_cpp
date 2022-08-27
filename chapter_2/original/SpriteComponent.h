@@ -13,7 +13,7 @@ class SpriteComponent : public Component
    {
    public:
       // (Lower draw order corresponds with further back)
-      SpriteComponent (class Actor *owner, int drawOrder = 100);
+      explicit SpriteComponent (class Actor *owner, int drawOrder = 100);
 
       ~SpriteComponent ();
 
@@ -21,13 +21,13 @@ class SpriteComponent : public Component
 
       virtual void SetTexture (SDL_Texture *texture);
 
-      int GetDrawOrder () const
+      [[nodiscard]] int GetDrawOrder () const
         { return mDrawOrder; }
 
-      int GetTexHeight () const
+      [[nodiscard]] int GetTexHeight () const
         { return mTexHeight; }
 
-      int GetTexWidth () const
+      [[nodiscard]] int GetTexWidth () const
         { return mTexWidth; }
 
    protected:

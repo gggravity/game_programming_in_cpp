@@ -10,7 +10,7 @@
 class AnimSpriteComponent : public SpriteComponent
    {
    public:
-      AnimSpriteComponent (class Actor *owner, int drawOrder = 100);
+      explicit AnimSpriteComponent (class Actor *owner, int drawOrder = 100);
 
       // Update animation every frame (overriden from component)
       void Update (float deltaTime) override;
@@ -19,7 +19,7 @@ class AnimSpriteComponent : public SpriteComponent
       void SetAnimTextures (const std::vector<SDL_Texture *> &textures);
 
       // Set/get the animation FPS
-      float GetAnimFPS () const
+      [[nodiscard]] float GetAnimFPS () const
         { return mAnimFPS; }
 
       void SetAnimFPS (float fps)

@@ -20,10 +20,10 @@ class Ship : public Actor
 
       void ProcessKeyboard (const uint8_t *state);
 
-      float GetRightSpeed () const
+      [[nodiscard]] float GetRightSpeed () const
         { return mRightSpeed; }
 
-      float GetDownSpeed () const
+      [[nodiscard]] float GetDownSpeed () const
         { return mDownSpeed; }
 
    private:
