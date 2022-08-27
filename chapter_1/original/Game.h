@@ -19,7 +19,6 @@ class Game
 
       // Initialize the game
       bool Initialize ();
-
       // Runs the game loop until the game is over
       void RunLoop ();
 
