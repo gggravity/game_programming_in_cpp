@@ -13,26 +13,26 @@ class SpriteComponent : public Component
    {
    public:
       // (Lower draw order corresponds with further back)
-      explicit SpriteComponent (class Actor *owner, int drawOrder = 100);
+      explicit SpriteComponent (class Actor *owner, int draw_order = 100);
 
-      ~SpriteComponent ();
+      ~SpriteComponent () override;
 
-      virtual void Draw (SDL_Renderer *renderer);
+      virtual void draw (SDL_Renderer *renderer);
 
-      virtual void SetTexture (SDL_Texture *texture);
+      virtual void set_texture (SDL_Texture *texture);
 
-      [[nodiscard]] int GetDrawOrder () const
-        { return mDrawOrder; }
+      [[nodiscard]] int get_draw_order () const
+        { return m_draw_order; }
 
-      [[nodiscard]] int GetTexHeight () const
-        { return mTexHeight; }
+      [[nodiscard]] int get_texture_height () const
+        { return m_texture_height; }
 
-      [[nodiscard]] int GetTexWidth () const
-        { return mTexWidth; }
+      [[nodiscard]] int get_texture_width () const
+        { return m_texture_width; }
 
    protected:
-      SDL_Texture *mTexture;
-      int mDrawOrder;
-      int mTexWidth;
-      int mTexHeight;
+      SDL_Texture *m_texture;
+      int m_draw_order;
+      int m_texture_width;
+      int m_texture_height;
    };

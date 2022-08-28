@@ -1,11 +1,3 @@
-// ----------------------------------------------------------------
-// From Game Programming in C++ by Sanjay Madhav
-// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
-// 
-// Released under the BSD License
-// See LICENSE in root directory for full details.
-// ----------------------------------------------------------------
-
 #pragma once
 
 #include <cstdint>
@@ -14,19 +6,19 @@
 class Ship : public Actor
    {
    public:
-      Ship (class Game *game);
+      explicit Ship (class Game *game);
 
-      void UpdateActor (float deltaTime) override;
+      void update_actor (float delta_time) override;
 
-      void ProcessKeyboard (const uint8_t *state);
+      void process_keyboard (const uint8_t *state);
 
-      [[nodiscard]] float GetRightSpeed () const
-        { return mRightSpeed; }
+      [[nodiscard]] float get_right_speed () const
+        { return m_right_speed; }
 
-      [[nodiscard]] float GetDownSpeed () const
-        { return mDownSpeed; }
+      [[nodiscard]] float get_down_speed () const
+        { return m_down_speed; }
 
    private:
-      float mRightSpeed;
-      float mDownSpeed;
+      float m_right_speed;
+      float m_down_speed;
    };

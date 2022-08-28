@@ -22,7 +22,7 @@ Game::Game () :
 
   }
 
-bool Game::Initialize ()
+bool Game::initialize ()
   {
     int sdlResult = SDL_Init(SDL_INIT_VIDEO);
 
@@ -56,7 +56,7 @@ bool Game::Initialize ()
     return true;
   }
 
-void Game::RunLoop ()
+void Game::run_loop ()
   {
     while (mIsRunning)
       {
@@ -66,14 +66,14 @@ void Game::RunLoop ()
       }
   }
 
-void Game::Shutdown ()
+void Game::shutdown ()
   {
     SDL_DestroyWindow(mWindow);
     SDL_Quit();
     SDL_DestroyRenderer(mRenderer);
   }
 
-void Game::ProcessInput ()
+void Game::process_input ()
   {
     SDL_Event event;
 
@@ -122,7 +122,7 @@ void Game::ProcessInput ()
 
   }
 
-void Game::UpdateGame ()
+void Game::update_game ()
   {
     // Wait until 16ms has elapsed since last frame
     while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
@@ -206,7 +206,7 @@ void Game::UpdateGame ()
       }
   }
 
-void Game::GenerateOutput ()
+void Game::generate_output ()
   {
     SDL_SetRenderDrawColor(
         mRenderer,

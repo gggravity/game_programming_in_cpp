@@ -1,23 +1,19 @@
-//
-// Created by martin on 27-08-22.
-//
-
 #include "Component.h"
 #include "Actor.h"
 
-Component::Component (Actor *owner, int updateOrder) :
-    mOwner(owner),
-    mUpdateOrder(updateOrder)
+Component::Component (Actor *owner, int update_order) :
+    m_owner(owner),
+    m_update_order(update_order)
   {
     // Add to actor's vector of components
-    mOwner->AddComponent(this);
+    m_owner->add_component(this);
   }
 
 Component::~Component ()
   {
-    mOwner->RemoveComponent(this);
+    m_owner->remove_component(this);
   }
 
-void Component::Update (float deltaTime)
+void Component::update (float delta_time)
   {
   }

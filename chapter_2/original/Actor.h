@@ -1,6 +1,3 @@
-//
-// Created by martin on 27-08-22.
-//
 #pragma once
 
 #include <vector>
@@ -13,9 +10,9 @@ class Actor
       // Used to track state of actor
       enum State
           {
-              EActive,
-              EPaused,
-              EDead
+              ACTIVE,
+              PAUSED,
+              DEAD
           };
 
       // Constructor/destructor
@@ -24,58 +21,58 @@ class Actor
       virtual ~Actor ();
 
       // Update function called from Game (not overridable)
-      void Update (float deltaTime);
+      void update (float delta_time);
 
       // Updates all the components attached to the actor (not overridable)
-      void UpdateComponents (float deltaTime);
+      void update_components (float delta_time);
 
       // Any actor-specific update code (overridable)
-      virtual void UpdateActor (float deltaTime);
+      virtual void update_actor (float delta_time);
 
       // Getters/setters
-      [[nodiscard]] const Vector2 &GetPosition () const
-        { return mPosition; }
+      [[nodiscard]] const Vector2 &get_position () const
+        { return m_position; }
 
-      void SetPosition (const Vector2 &pos)
-        { mPosition = pos; }
+      void set_position (const Vector2 &pos)
+        { m_position = pos; }
 
-      [[nodiscard]] float GetScale () const
-        { return mScale; }
+      [[nodiscard]] float get_scale () const
+        { return m_scale; }
 
-      void SetScale (float scale)
-        { mScale = scale; }
+      void set_scale (float scale)
+        { m_scale = scale; }
 
-      [[nodiscard]] float GetRotation () const
-        { return mRotation; }
+      [[nodiscard]] float get_rotation () const
+        { return m_rotation; }
 
-      void SetRotation (float rotation)
-        { mRotation = rotation; }
+      void set_rotation (float rotation)
+        { m_rotation = rotation; }
 
-      [[nodiscard]] State GetState () const
-        { return mState; }
+      [[nodiscard]] State get_state () const
+        { return m_state; }
 
-      void SetState (State state)
-        { mState = state; }
+      void set_state (State state)
+        { m_state = state; }
 
-      class Game *GetGame ()
-        { return mGame; }
+      class Game *get_game ()
+        { return m_game; }
 
       // Add/remove components
-      void AddComponent (class Component *component);
+      void add_component (class Component *component);
 
-      void RemoveComponent (class Component *component);
+      void remove_component (class Component *component);
 
    private:
       // Actor's state
-      State mState;
+      State m_state;
       // Transform
 
-      Vector2 mPosition; // Center position of actor
-      float mScale;// Uniforms scale of actor (1.0f for 100%)
-      float mRotation;// Rotation angle (in radians)
+      Vector2 m_position; // Center position of actor
+      float m_scale;// Uniforms scale of actor (1.0f for 100%)
+      float m_rotation;// Rotation angle (in radians)
 
       // Components held by this actor
-      std::vector<class Component *> mComponents;
+      std::vector<class Component *> m_components;
 
-      class Game *mGame;
+      class Game *m_game;
    };

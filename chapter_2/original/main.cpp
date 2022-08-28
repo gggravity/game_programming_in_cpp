@@ -3,14 +3,14 @@
 int main (int argc, char **argv)
   {
     Game game;
-    bool success = game.Initialize();
+    bool success = game.initialize();
 
     if (success)
       {
-        game.RunLoop();
+        game.run_loop();
       }
 
-    game.Shutdown();
+    game.shutdown();
 
     return 0;
   }

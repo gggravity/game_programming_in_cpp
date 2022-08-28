@@ -1,39 +1,33 @@
-// ----------------------------------------------------------------
-// From Game Programming in C++ by Sanjay Madhav
-// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
-// 
-// Released under the BSD License
-// See LICENSE in root directory for full details.
-// ----------------------------------------------------------------
-
 #include "Ship.h"
-#include "AnimSpriteComponent.h"
+#include "AnimationSpriteComponent.h"
 #include "Game.h"
 
-Ship::Ship (Game *game)
-    : Actor(game),
-    mRightSpeed(0.0f),
-    mDownSpeed(0.0f)
+Ship::Ship (Game *game) :
+    Actor(game),
+    m_right_speed(0.0f),
+    m_down_speed(0.0f)
   {
     // Create an animated sprite component
-    AnimSpriteComponent *asc = new AnimSpriteComponent(this);
-    std::vector<SDL_Texture *> anims = {
-        game->GetTexture("../../Assets/Ship01.png"),
-        game->GetTexture("../../Assets/Ship02.png"),
-        game->GetTexture("../../Assets/Ship03.png"),
-        game->GetTexture("../../Assets/Ship04.png"),
+    auto *asc = new AnimationSpriteComponent(this);
+    std::vector<SDL_Texture *> animations = {
+        game->get_texture("../../Assets/Ship01.png"),
+        game->get_texture("../../Assets/Ship02.png"),
+        game->get_texture("../../Assets/Ship03.png"),
+        game->get_texture("../../Assets/Ship04.png"),
     };
-    asc->SetAnimTextures(anims);
+    asc->set_animation_textures(animations);
   }
 
-void Ship::UpdateActor (float deltaTime)
+void Ship::update_actor (float delta_time)
   {
-    Actor::UpdateActor(deltaTime);
+    Actor::update_actor(delta_time);
+
     // Update position based on speeds and delta time
-    Vector2 pos = GetPosition();
-    pos.x += mRightSpeed * deltaTime;
-    pos.y += mDownSpeed * deltaTime;
-    // Restrict position to left half of screen
+    Vector2 pos = get_position();
+    pos.x += m_right_speed * delta_time;
+    pos.y += m_down_speed * delta_time;
+
+    // Restrict position to the left half of screen
     if (pos.x < 25.0f)
       {
         pos.x = 25.0f;
@@ -50,29 +44,31 @@ void Ship::UpdateActor (float deltaTime)
       {
         pos.y = 743.0f;
       }
-    SetPosition(pos);
+    set_position(pos);
   }
 
-void Ship::ProcessKeyboard (const uint8_t *state)
+void Ship::process_keyboard (const uint8_t *state)
   {
-    mRightSpeed = 0.0f;
-    mDownSpeed = 0.0f;
+    m_right_speed = 0.0f;
+    m_down_speed = 0.0f;
+
     // right/left
     if (state[SDL_SCANCODE_D])
       {
-        mRightSpeed += 250.0f;
+        m_right_speed += 250.0f;
       }
     if (state[SDL_SCANCODE_A])
       {
-        mRightSpeed -= 250.0f;
+        m_right_speed -= 250.0f;
       }
+
     // up/down
     if (state[SDL_SCANCODE_S])
       {
-        mDownSpeed += 300.0f;
+        m_down_speed += 300.0f;
       }
     if (state[SDL_SCANCODE_W])
       {
-        mDownSpeed -= 300.0f;
+        m_down_speed -= 300.0f;
       }
   }

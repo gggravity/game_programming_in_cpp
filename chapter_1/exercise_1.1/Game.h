@@ -18,21 +18,21 @@ class Game
       Game ();
 
       // Initialize the game
-      bool Initialize ();
+      bool initialize ();
       // Runs the game loop until the game is over
-      void RunLoop ();
+      void run_loop ();
 
       // Shutdown the game
-      void Shutdown ();
+      void shutdown ();
 
    private:
 
       // Helper functions for the game loop
-      void ProcessInput ();
+      void process_input ();
 
-      void UpdateGame ();
+      void update_game ();
 
-      void GenerateOutput ();
+      void generate_output ();
 
       // Window created by SDL
       SDL_Window *mWindow;

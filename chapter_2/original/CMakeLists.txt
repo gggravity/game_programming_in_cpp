@@ -3,7 +3,7 @@ project(game)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(game main.cpp Math.h Game.cpp Game.h Actor.cpp Actor.h Component.cpp Component.h SpriteComponent.cpp SpriteComponent.h AnimSpriteComponent.cpp AnimSpriteComponent.h BGSpriteComponent.cpp BGSpriteComponent.h Ship.cpp Ship.h)
+add_executable(game main.cpp Math.h Game.cpp Game.h Actor.cpp Actor.h Component.cpp Component.h SpriteComponent.cpp SpriteComponent.h AnimationSpriteComponent.cpp AnimationSpriteComponent.h BackgroundSpriteComponent.cpp BackgroundSpriteComponent.h Ship.cpp Ship.h)
 
 # For finding our SDL2 package!
 INCLUDE(FindPkgConfig)

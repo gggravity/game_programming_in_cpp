@@ -1,52 +1,51 @@
-//
-// Created by martin on 27-08-22.
-//
-
 #include "SpriteComponent.h"
 #include "Actor.h"
 #include "Game.h"
 
-SpriteComponent::SpriteComponent (Actor *owner, int drawOrder) :
+SpriteComponent::SpriteComponent (Actor *owner, int draw_order) :
     Component(owner),
-    mTexture(nullptr),
-    mDrawOrder(drawOrder),
-    mTexWidth(0),
-    mTexHeight(0)
+    m_texture(nullptr),
+    m_draw_order(draw_order),
+    m_texture_width(0),
+    m_texture_height(0)
   {
-    mOwner->GetGame()->AddSprite(this);
+    m_owner->get_game()->add_sprite(this);
   }
 
 SpriteComponent::~SpriteComponent ()
   {
-    mOwner->GetGame()->RemoveSprite(this);
+    m_owner->get_game()->remove_sprite(this);
   }
 
-void SpriteComponent::Draw (SDL_Renderer *renderer)
+void SpriteComponent::draw (SDL_Renderer *renderer)
   {
-    if (mTexture)
+    if (m_texture)
       {
         SDL_Rect r;
+
         // Scale the width/height by owner's scale
-        r.w = static_cast<int>(float(mTexWidth) * mOwner->GetScale());
-        r.h = static_cast<int>(float(mTexHeight) * mOwner->GetScale());
+        r.w = static_cast<int>(float(m_texture_width) * m_owner->get_scale());
+        r.h = static_cast<int>(float(m_texture_height) * m_owner->get_scale());
+
         // Center the rectangle around the position of the owner
-        r.x = static_cast<int>(mOwner->GetPosition().x - float(r.w) / 2);
-        r.y = static_cast<int>(mOwner->GetPosition().y - float(r.h) / 2);
+        r.x = static_cast<int>(m_owner->get_position().x - float(r.w) / 2);
+        r.y = static_cast<int>(m_owner->get_position().y - float(r.h) / 2);
 
         // Draw (have to convert angle from radians to degrees, and clockwise to counter)
         SDL_RenderCopyEx(renderer,
-                         mTexture,
+                         m_texture,
                          nullptr,
                          &r,
-                         -Math::ToDegrees(mOwner->GetRotation()),
+                         -Math::ToDegrees(m_owner->get_rotation()),
                          nullptr,
                          SDL_FLIP_NONE);
       }
   }
 
-void SpriteComponent::SetTexture (SDL_Texture *texture)
+void SpriteComponent::set_texture (SDL_Texture *texture)
   {
-    mTexture = texture;
+    m_texture = texture;
+
     // Set width/height
-    SDL_QueryTexture(texture, nullptr, nullptr, &mTexWidth, &mTexHeight);
+    SDL_QueryTexture(texture, nullptr, nullptr, &m_texture_width, &m_texture_height);
   }

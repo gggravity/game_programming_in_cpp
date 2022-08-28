@@ -1,79 +1,76 @@
-//
-// Created by martin on 27-08-22.
-//
-
 #include "Actor.h"
 #include "Game.h"
 #include "Component.h"
 #include <algorithm>
 
 Actor::Actor (Game *game) :
-    mState(EActive),
-    mPosition(),
-    mScale(1.0f),
-    mRotation(0.0f),
-    mGame(game)
+    m_state(ACTIVE),
+    m_position(),
+    m_scale(1.0f),
+    m_rotation(0.0f),
+    m_game(game)
   {
-    mGame->AddActor(this);
+    m_game->add_actor(this);
   }
 
 Actor::~Actor ()
   {
-    mGame->RemoveActor(this);
+    m_game->remove_actor(this);
+
     // Need to delete components
     // Because ~Component calls RemoveComponent, need a different style loop
-    while (!mComponents.empty())
+    while (!m_components.empty())
       {
-        delete mComponents.back();
+        delete m_components.back();
       }
   }
 
-void Actor::Update (float deltaTime)
+void Actor::update (float delta_time)
   {
-    if (mState == EActive)
+    if (m_state == ACTIVE)
       {
-        UpdateComponents(deltaTime);
-        UpdateActor(deltaTime);
+        update_components(delta_time);
+        update_actor(delta_time);
       }
   }
 
-void Actor::UpdateComponents (float deltaTime)
+void Actor::update_components (float delta_time)
   {
-    for (auto comp : mComponents)
+    for (auto comp : m_components)
       {
-        comp->Update(deltaTime);
+        comp->update(delta_time);
       }
   }
 
-void Actor::UpdateActor (float deltaTime)
+void Actor::update_actor (float delta_time)
   {
   }
 
-void Actor::AddComponent (Component *component)
+void Actor::add_component (struct Component *component)
   {
     // Find the insertion point in the sorted vector
     // (The first element with an order higher than me)
-    int myOrder = component->GetUpdateOrder();
-    auto iter = mComponents.begin();
+    int my_order = component->get_update_order();
+    auto iter = m_components.begin();
     for (;
-        iter != mComponents.end() ;
+        iter != m_components.end() ;
         ++iter)
       {
-        if (myOrder < ( *iter )->GetUpdateOrder())
+        if (my_order < ( *iter )->get_update_order())
           {
             break;
           }
       }
 
     // Inserts element before position of iterator
-    mComponents.insert(iter, component);
+    m_components.insert(iter, component);
   }
 
-void Actor::RemoveComponent (Component *component)
+void Actor::remove_component (struct Component *component)
   {
-    auto iter = std::find(mComponents.begin(), mComponents.end(), component);
-    if (iter != mComponents.end())
+    auto iter = std::find(m_components.begin(), m_components.end(), component);
+    if (iter != m_components.end())
       {
-        mComponents.erase(iter);
+        m_components.erase(iter);
       }
   }
