@@ -284,8 +284,7 @@ void Game::add_sprite (SpriteComponent *sprite)
     int my_draw_order = sprite->get_draw_order();
     auto iter = m_sprites.begin();
     for (;
-        iter != m_sprites.end() ;
-        ++iter)
+        iter != m_sprites.end() ; ++iter)
       {
         if (my_draw_order < ( *iter )->get_draw_order())
           {
