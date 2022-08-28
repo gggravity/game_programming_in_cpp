@@ -3,7 +3,7 @@ project(game)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(game main.cpp Game.cpp Game.h Actor.cpp Actor.h Animal.cpp Animal.h Bear.cpp Bear.h)
+add_executable(game main.cpp Game.cpp Game.h Actor.cpp Actor.h Animal.cpp Animal.h Bear.cpp Bear.h Hippo.cpp Hippo.h Pig.cpp Pig.h Narwhal.cpp Narwhal.h Penguin.cpp Penguin.h Walrus.cpp Walrus.h)
 
 # For finding our SDL2 package!
 INCLUDE(FindPkgConfig)

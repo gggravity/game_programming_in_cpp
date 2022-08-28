@@ -12,28 +12,36 @@ struct Animal : Actor
    {
       explicit Animal (class Game *game);
 
+      virtual ~Animal ();
+
       void update (float delta_time) override;
 
       void draw () override;
 
-      virtual void make_sound ();
+      void make_sound ();
 
-      int x ()
+      bool making_sound;
+
+      [[nodiscard]] int x () const
         { return image_rectangel.x; }
 
-      int y ()
+      [[nodiscard]] int y () const
         { return image_rectangel.y; }
 
-      int w ()
+      [[nodiscard]] int w () const
         { return image_rectangel.w; }
 
-      int h ()
+      [[nodiscard]] int h () const
         { return image_rectangel.h; }
 
    protected:
-      SDL_Rect image_rectangel;
-      SDL_Texture *image_texture;
-      SDL_Surface *image_surface;
+      SDL_Rect image_rectangel{};
+      SDL_Texture *image_texture{};
+      SDL_Surface *image_surface{};
+
+      SDL_Rect text_rectangle{};
+      SDL_Texture *text_texture{};
+      SDL_Surface *text_surface{};
    };
 
 SDL_Surface *load_image (const string &file_name);

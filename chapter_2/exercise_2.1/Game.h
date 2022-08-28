@@ -22,6 +22,8 @@ struct Game
 
       SDL_Renderer *renderer;
 
+      vector<class Animal *> animals;
+
    private:
       void process_input ();
 
@@ -32,8 +34,6 @@ struct Game
       void load_data ();
 
       void unload_data ();
-
-      vector<class Animal *> animals;
 
       SDL_Window *window;
       Uint32 tick_count;

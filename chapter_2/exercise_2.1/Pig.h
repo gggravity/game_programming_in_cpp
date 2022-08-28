@@ -6,9 +6,9 @@
 
 #include "Animal.h"
 
-struct Bear : Animal
+struct Pig : Animal
    {
-      explicit Bear (Game *game);
+      explicit Pig (Game *game);
 
       void update (float delta_time) override;
 

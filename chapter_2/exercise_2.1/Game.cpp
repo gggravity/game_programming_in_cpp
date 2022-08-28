@@ -4,6 +4,11 @@
 #include <bits/stdc++.h>
 #include "Actor.h"
 #include "Bear.h"
+#include "Hippo.h"
+#include "Pig.h"
+#include "Narwhal.h"
+#include "Penguin.h"
+#include "Walrus.h"
 
 Game::Game () :
     window(nullptr),
@@ -73,12 +78,17 @@ void Game::process_input ()
                   {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
-                    cout << "clicked mouse (" << x << ", " << y << ")" << endl;
+//                    cout << "clicked mouse (" << x << ", " << y << ")" << endl;
                     for (auto animal : animals)
                       {
-                        if (x > animal->x() && x < animal->x() + animal->w())
+                        if (x > animal->x() && x < animal->x() + animal->w() &&
+                            y > animal->y() && y < animal->y() + animal->h())
                           {
                             animal->make_sound();
+                          }
+                        else
+                          {
+                            animal->making_sound = false;
                           }
                       }
                   }
@@ -89,7 +99,12 @@ void Game::process_input ()
       }
 
     const Uint8 *state = SDL_GetKeyboardState(nullptr);
+
     if (state[SDL_SCANCODE_ESCAPE])
+      {
+        is_running = false;
+      }
+    if (state[SDL_SCANCODE_Q])
       {
         is_running = false;
       }
@@ -113,7 +128,7 @@ void Game::update_game ()
 
 void Game::generate_output ()
   {
-    SDL_SetRenderDrawColor(renderer, 123, 123, 123, 255);
+    SDL_SetRenderDrawColor(renderer, 66, 66, 66, 255);
 
     SDL_RenderClear(renderer);
 
@@ -129,6 +144,21 @@ void Game::load_data ()
   {
     auto bear = new Bear(this);
     animals.emplace_back(bear);
+
+    auto hippo = new Hippo(this);
+    animals.emplace_back(hippo);
+
+    auto pig = new Pig(this);
+    animals.emplace_back(pig);
+
+    auto narwhal = new Narwhal(this);
+    animals.emplace_back(narwhal);
+
+    auto penguin = new Penguin(this);
+    animals.emplace_back(penguin);
+
+    auto whalrus = new Walrus(this);
+    animals.emplace_back(whalrus);
   }
 
 void Game::unload_data ()

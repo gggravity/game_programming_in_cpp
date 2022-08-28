@@ -2,27 +2,27 @@
 // Created by martin on 28-08-22.
 //
 
+#include "Walrus.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
 #include <bits/stdc++.h>
-#include "Bear.h"
 
 using namespace std;
 
-Bear::Bear (Game *game) :
+Walrus::Walrus (Game *game) :
     Animal(game)
   {
     // set the image coordiantes and dimensions
-    image_rectangel.w = 162;
+    image_rectangel.w = 166;
     image_rectangel.h = 128;
-    image_rectangel.x = image_rectangel.w / 2;
-    image_rectangel.y = 100;
+    image_rectangel.x = 2 * width / 3 + image_rectangel.w / 2;
+    image_rectangel.y = 300;
 
     // load font and get the text surface
     auto font { load_font("../../Assets/FFF_Tusj.ttf", 80) };
-    auto color { SDL_Color { 142, 90, 50, 255 } };
-    text_surface = surface_from_font("The Bear ROARS", font, color);
+    auto color { SDL_Color { 152, 108, 76, 255 } };
+    text_surface = surface_from_font("The Walrus Growls", font, color);
     text_texture = SDL_CreateTextureFromSurface(game->renderer, text_surface);
 
     // set the dimensions with the new text surface.
@@ -32,16 +32,16 @@ Bear::Bear (Game *game) :
     text_rectangle.y = height - text_surface->h - 50;
 
     // load the image and get the texture
-    image_surface = load_image("../../Assets/animals/bear.png");
+    image_surface = load_image("../../Assets/animals/walrus.png");
     image_texture = texture_from_surface(image_surface, game->renderer);
   }
 
-void Bear::update (float delta_time)
+void Walrus::update (float delta_time)
   {
     Animal::update(delta_time);
   }
 
-void Bear::draw ()
+void Walrus::draw ()
   {
     SDL_RenderCopyEx(game->renderer,
                      image_texture,
@@ -55,7 +55,4 @@ void Bear::draw ()
       {
         SDL_RenderCopy(game->renderer, text_texture, nullptr, &text_rectangle);
       }
-
   }
-
-

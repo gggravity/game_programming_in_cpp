@@ -8,9 +8,16 @@
 using namespace std;
 
 Animal::Animal (class Game *game) :
-    Actor(game)
+    Actor(game),
+    making_sound(false)
   {
-//    cout << "Animal constructed..." << endl;
+
+  }
+
+Animal::~Animal ()
+  {
+    SDL_FreeSurface(text_surface);
+    SDL_DestroyTexture(text_texture);
   }
 
 void Animal::update (float delta_time)
@@ -20,12 +27,19 @@ void Animal::update (float delta_time)
 
 void Animal::draw ()
   {
-
   }
 
 void Animal::make_sound ()
   {
-    cout << "I am a DEFAULT Animal!!!" << endl;
+    making_sound = !making_sound;
+
+    for (auto animal : game->animals)
+      {
+        if (animal != this)
+          {
+            animal->making_sound = false;
+          }
+      }
   }
 
 SDL_Surface *load_image (const string &file_name)
@@ -75,7 +89,7 @@ TTF_Font *load_font (const string &file_name, int size)
     return font;
   }
 
-SDL_Surface *surface_from_font (const string& text, TTF_Font *font, SDL_Color color)
+SDL_Surface *surface_from_font (const string &text, TTF_Font *font, SDL_Color color)
   {
     auto m_text_surface = TTF_RenderText_Solid(font, text.c_str(), color);
 
