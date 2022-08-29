@@ -9,12 +9,14 @@
 #include "Narwhal.h"
 #include "Penguin.h"
 #include "Walrus.h"
+#include "Car.h"
 
 Game::Game () :
     window(nullptr),
     renderer(nullptr),
     is_running(false),
-    tick_count(0)
+    tick_count(0),
+    car(nullptr)
   {
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
@@ -122,15 +124,6 @@ void Game::process_input ()
       {
         is_running = false;
       }
-
-    if (!Mix_PlayingMusic())
-      {
-        for (auto animal : animals)
-          {
-            animal->making_sound = false;
-          }
-      }
-
   }
 
 void Game::update_game ()
@@ -147,6 +140,16 @@ void Game::update_game ()
         delta_time = 0.05f;
       }
     tick_count = SDL_GetTicks();
+
+    if (!Mix_PlayingMusic())
+      {
+        for (auto animal : animals)
+          {
+            animal->making_sound = false;
+          }
+      }
+
+      car->update(delta_time);
   }
 
 void Game::generate_output ()
@@ -159,6 +162,8 @@ void Game::generate_output ()
       {
         animal->draw();
       }
+
+    car->draw();
 
     SDL_RenderPresent(renderer);
   }
@@ -182,6 +187,8 @@ void Game::load_data ()
 
     auto whalrus = new Walrus(this);
     animals.emplace_back(whalrus);
+
+    car = new Car(this);
   }
 
 void Game::unload_data ()

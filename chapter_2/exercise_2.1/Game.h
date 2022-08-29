@@ -39,4 +39,5 @@ struct Game
       SDL_Window *window;
       Uint32 tick_count;
 
+      class Car *car;
    };
