@@ -19,8 +19,7 @@ Penguin::Penguin (Game *game) :
     image_rectangel.x = width / 3 + image_rectangel.w / 2;
     image_rectangel.y = 300;
 
-    // load font and get the text surface
-    auto font { load_font("../../Assets/FFF_Tusj.ttf", 80) };
+    // get the text surface
     auto color { SDL_Color { 54, 90, 102, 255 } };
     text_surface = surface_from_font("The Penguin Bleat", font, color);
     text_texture = SDL_CreateTextureFromSurface(game->renderer, text_surface);
@@ -34,6 +33,8 @@ Penguin::Penguin (Game *game) :
     // load the image and get the texture
     image_surface = load_image("../../Assets/animals/penguin.png");
     image_texture = texture_from_surface(image_surface, game->renderer);
+
+    music = Mix_LoadMUS("../../Assets/mp3/penguin.mp3");
   }
 
 void Penguin::update (float delta_time)

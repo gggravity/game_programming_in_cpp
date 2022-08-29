@@ -19,8 +19,7 @@ Walrus::Walrus (Game *game) :
     image_rectangel.x = 2 * width / 3 + image_rectangel.w / 2;
     image_rectangel.y = 300;
 
-    // load font and get the text surface
-    auto font { load_font("../../Assets/FFF_Tusj.ttf", 80) };
+    // get the text surface
     auto color { SDL_Color { 152, 108, 76, 255 } };
     text_surface = surface_from_font("The Walrus Growls", font, color);
     text_texture = SDL_CreateTextureFromSurface(game->renderer, text_surface);
@@ -34,6 +33,8 @@ Walrus::Walrus (Game *game) :
     // load the image and get the texture
     image_surface = load_image("../../Assets/animals/walrus.png");
     image_texture = texture_from_surface(image_surface, game->renderer);
+
+    music = Mix_LoadMUS("../../Assets/mp3/walrus.mp3");
   }
 
 void Walrus::update (float delta_time)

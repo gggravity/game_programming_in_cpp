@@ -19,8 +19,7 @@ Bear::Bear (Game *game) :
     image_rectangel.x = image_rectangel.w / 2;
     image_rectangel.y = 100;
 
-    // load font and get the text surface
-    auto font { load_font("../../Assets/FFF_Tusj.ttf", 80) };
+    // get the text surface
     auto color { SDL_Color { 142, 90, 50, 255 } };
     text_surface = surface_from_font("The Bear ROARS", font, color);
     text_texture = SDL_CreateTextureFromSurface(game->renderer, text_surface);
@@ -34,6 +33,8 @@ Bear::Bear (Game *game) :
     // load the image and get the texture
     image_surface = load_image("../../Assets/animals/bear.png");
     image_texture = texture_from_surface(image_surface, game->renderer);
+
+    music = Mix_LoadMUS("../../Assets/mp3/bear.mp3");
   }
 
 void Bear::update (float delta_time)
@@ -55,7 +56,6 @@ void Bear::draw ()
       {
         SDL_RenderCopy(game->renderer, text_texture, nullptr, &text_rectangle);
       }
-
   }
 
 

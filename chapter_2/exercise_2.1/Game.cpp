@@ -20,11 +20,13 @@ Game::Game () :
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
       {
         cerr << "Unable to initialize SDL: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
       }
 
     if (TTF_Init() < 0)
       {
         cerr << "Couldn't initialize TTF lib: " << TTF_GetError() << endl;
+        exit(EXIT_FAILURE);
       }
 
     window = SDL_CreateWindow("The safari !!!", 100, 100, width, height, 0);
@@ -32,18 +34,30 @@ Game::Game () :
     if (!window)
       {
         cerr << "Failed to create window: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
       }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
     if (!renderer)
       {
         cerr << "Failed to create renderer: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
       }
 
     if (IMG_Init(IMG_INIT_PNG) == 0)
       {
         cerr << "Unable to initialize SDL_image: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
       }
+
+    if (SDL_Init(SDL_INIT_AUDIO) < 0)
+      {
+        cerr << "Unable to initialize SDL_audio: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
+      }
+
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
     load_data();
 
@@ -108,6 +122,15 @@ void Game::process_input ()
       {
         is_running = false;
       }
+
+    if (!Mix_PlayingMusic())
+      {
+        for (auto animal : animals)
+          {
+            animal->making_sound = false;
+          }
+      }
+
   }
 
 void Game::update_game ()
@@ -177,5 +200,6 @@ Game::~Game ()
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+//    Mix_FreeMusic(music); //
     SDL_Quit();
   }

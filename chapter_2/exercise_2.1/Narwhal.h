@@ -13,4 +13,4 @@ struct Narwhal : Animal
         void update (float delta_time) override;
 
         void draw () override;
-   };
+    };

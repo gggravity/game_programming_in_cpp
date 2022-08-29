@@ -22,6 +22,10 @@ struct Animal : Actor
 
       bool making_sound;
 
+      Mix_Music *music{};
+
+      TTF_Font *font;
+
       [[nodiscard]] int x () const
         { return image_rectangel.x; }
 
@@ -35,13 +39,13 @@ struct Animal : Actor
         { return image_rectangel.h; }
 
    protected:
-      SDL_Rect image_rectangel{};
-      SDL_Texture *image_texture{};
-      SDL_Surface *image_surface{};
+      SDL_Rect image_rectangel { };
+      SDL_Texture *image_texture { };
+      SDL_Surface *image_surface { };
 
-      SDL_Rect text_rectangle{};
-      SDL_Texture *text_texture{};
-      SDL_Surface *text_surface{};
+      SDL_Rect text_rectangle { };
+      SDL_Texture *text_texture { };
+      SDL_Surface *text_surface { };
    };
 
 SDL_Surface *load_image (const string &file_name);

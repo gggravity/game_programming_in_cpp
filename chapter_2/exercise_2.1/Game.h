@@ -2,6 +2,7 @@
 
 #include <bits/stdc++.h>
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_mixer.h"
 #include "Actor.h"
 
 using namespace std;

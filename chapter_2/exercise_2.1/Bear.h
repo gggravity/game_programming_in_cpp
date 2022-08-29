@@ -7,10 +7,10 @@
 #include "Animal.h"
 
 struct Bear : Animal
-   {
-      explicit Bear (Game *game);
+    {
+        explicit Bear (Game *game);
 
-      void update (float delta_time) override;
+        void update (float delta_time) override;
 
-      void draw () override;
-   };
+        void draw () override;
+    };
