@@ -41,5 +41,10 @@ void Animal::make_sound ()
             animal->making_sound = false;
           }
       }
+
     Mix_PlayMusic(music, false);
+//    if (!Mix_PlayingMusic())
+//      {
+//        Mix_ResumeMusic();
+//      }
   }

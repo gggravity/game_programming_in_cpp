@@ -27,6 +27,8 @@ Car::Car (struct Game *game) :
 
     // load sound effect
     music = Mix_LoadMUS("../../Assets/mp3/car.mp3");
+
+    Mix_PlayMusic(music, true);
   }
 
 Car::~Car ()
@@ -40,12 +42,23 @@ void Car::update (float delta_time)
   {
     if (is_driving)
       {
+        if (!Mix_PlayingMusic())
+          {
+            Mix_PlayMusic(music, true);
+          }
         image_rectangel.x++;
         if (image_rectangel.x > width)
           {
             image_rectangel.x = -image_rectangel.w;
           }
       }
+//    else
+//      {
+//        if (Mix_PlayingMusic())
+//          {
+//            Mix_HaltMusic();
+//          }
+//      }
   }
 
 void Car::draw ()
@@ -59,4 +72,3 @@ void Car::draw ()
                      SDL_FLIP_HORIZONTAL);
   }
 
-//Mix_PlayMusic(music, false);

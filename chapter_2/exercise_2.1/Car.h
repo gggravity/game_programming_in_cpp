@@ -16,10 +16,23 @@ struct Car : Actor
 
       void draw () override;
 
-   private:
+      [[nodiscard]] int x () const
+        { return image_rectangel.x; }
+
+      [[nodiscard]] int y () const
+        { return image_rectangel.y; }
+
+      [[nodiscard]] int w () const
+        { return image_rectangel.w; }
+
+      [[nodiscard]] int h () const
+        { return image_rectangel.h; }
+
       bool is_driving;
+
+   private:
       SDL_Rect image_rectangel;
       SDL_Texture *image_texture;
       SDL_Surface *image_surface;
-      Mix_Music *music{};
+      Mix_Music *music;
    };

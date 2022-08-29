@@ -95,6 +95,16 @@ void Game::process_input ()
                     int x, y;
                     SDL_GetMouseState(&x, &y);
 //                    cout << "clicked mouse (" << x << ", " << y << ")" << endl;
+
+                    // check if clicked on the car
+                    if (x > car->x() && x < car->x() + car->w() &&
+                        y > car->y() && y < car->y() + car->h())
+                      {
+                        car->is_driving = !car->is_driving;
+                        continue;
+                      }
+
+                    // check if clicked on one of the animals
                     for (auto animal : animals)
                       {
                         if (x > animal->x() && x < animal->x() + animal->w() &&
@@ -107,6 +117,7 @@ void Game::process_input ()
                             animal->making_sound = false;
                           }
                       }
+
                   }
               }
             break;
@@ -149,7 +160,7 @@ void Game::update_game ()
           }
       }
 
-      car->update(delta_time);
+    car->update(delta_time);
   }
 
 void Game::generate_output ()
